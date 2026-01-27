@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: clinic_sqlserver
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Baitaplon321@ # Nên dùng MSSQL_SA_PASSWORD cho bản 2022
+    ports:
+      - "1433:1433"
+    volumes:
+      # Mount file SQL vào thư mục tmp để dễ thao tác
+      - ./clinic.sql:/tmp/clinic.sql:ro
+      # Nên có thêm volume để lưu trữ dữ liệu bền vững, tránh mất data khi xóa container
+      - sql_data:/var/opt/mssql
+    command: >
+      /bin/bash -c "
+      /opt/mssql/bin/sqlservr &
+      echo 'Waiting for SQL Server to start...' &&
+      sleep 30 &&
+      echo 'Running initialization script...' &&
+      /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Baitaplon321@ -i /tmp/clinic.sql &&
+      echo 'Database initialized!' &&
+      wait
+      "
+
+volumes:
+  sql_data:
