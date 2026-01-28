@@ -83,6 +83,7 @@
             nhânViênToolStripMenuItem1.Name = "nhânViênToolStripMenuItem1";
             nhânViênToolStripMenuItem1.Size = new Size(180, 22);
             nhânViênToolStripMenuItem1.Text = "Nhân viên";
+            nhânViênToolStripMenuItem1.Click += nhânViênToolStripMenuItem1_Click;
             // 
             // phòngBanToolStripMenuItem
             // 
