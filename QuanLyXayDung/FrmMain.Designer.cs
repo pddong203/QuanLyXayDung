@@ -1,4 +1,4 @@
-﻿namespace QuanLyXayDung
+namespace QuanLyXayDung
 {
     partial class FrmMain
     {
@@ -84,18 +84,19 @@
             nhânViênToolStripMenuItem1.Size = new Size(180, 22);
             nhânViênToolStripMenuItem1.Text = "Nhân viên";
             // 
-            // phòngBanToolStripMenuItem
+            // phongBanToolStripMenuItem
             // 
             phòngBanToolStripMenuItem.Name = "phòngBanToolStripMenuItem";
             phòngBanToolStripMenuItem.Size = new Size(180, 22);
             phòngBanToolStripMenuItem.Text = "Phòng ban";
-            phòngBanToolStripMenuItem.Click += phòngBanToolStripMenuItem_Click;
+            phòngBanToolStripMenuItem.Click += phongBanToolStripMenuItem_Click;
             // 
-            // côngTrìnhToolStripMenuItem
+            // congTrinhToolStripMenuItem
             // 
             côngTrìnhToolStripMenuItem.Name = "côngTrìnhToolStripMenuItem";
             côngTrìnhToolStripMenuItem.Size = new Size(180, 22);
             côngTrìnhToolStripMenuItem.Text = "Công trình";
+            côngTrìnhToolStripMenuItem.Click += congTrinhToolStripMenuItem_Click;
             // 
             // thiCôngToolStripMenuItem
             // 

@@ -7,10 +7,18 @@ namespace QuanLyXayDung
             InitializeComponent();
         }
 
-        private void ph�ngBanToolStripMenuItem_Click(object sender, EventArgs e)
+        // Menu: Danh mục -> Phòng ban
+        private void phongBanToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmPhongBan f = new FrmPhongBan();
-            f.Show();
+            var form = new FrmPhongBan();
+            form.Show();
+        }
+
+        // Menu: Danh mục -> Công trình
+        private void congTrinhToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new FrmCongTrinh();
+            form.Show();
         }
     }
 }

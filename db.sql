@@ -309,10 +309,128 @@ BEGIN
 END;
 GO
 
+-- 4.1.2. NHÓM QUẢN LÝ CÔNG TRÌNH (THÊM, SỬA, XÓA)
+------------------------------------------------
+CREATE PROCEDURE sp_LayDanhSachCongTrinh
+AS
+BEGIN
+    SELECT 
+        ct.MaCT,
+        ct.TenCT,
+        ct.DiaDiem,
+        ct.NgayCapPhep,
+        ct.NgayKhoiCong,
+        ct.NgayDuKienHoanThanh,
+        COUNT(tc.MaNV) AS SoNhanVien
+    FROM tblCongtrinh ct
+    LEFT JOIN tblThicong tc ON ct.MaCT = tc.MaCT
+    GROUP BY 
+        ct.MaCT,
+        ct.TenCT,
+        ct.DiaDiem,
+        ct.NgayCapPhep,
+        ct.NgayKhoiCong,
+        ct.NgayDuKienHoanThanh;
+END;
+GO
 
+CREATE PROCEDURE sp_ThemCongTrinh
+    @MaCT VARCHAR(10),
+    @TenCT NVARCHAR(100),
+    @DiaDiem NVARCHAR(100),
+    @NgayCapPhep DATE,
+    @NgayKhoiCong DATE,
+    @NgayDuKienHoanThanh DATE
+AS
+BEGIN
+    -- Kiểm tra mã công trình đã tồn tại
+    IF EXISTS (SELECT 1 FROM tblCongtrinh WHERE MaCT = @MaCT)
+    BEGIN
+        PRINT N'Mã công trình đã tồn tại!';
+        RETURN;
+    END
 
+    -- Kiểm tra tên công trình không được rỗng
+    IF @TenCT IS NULL OR LEN(LTRIM(RTRIM(@TenCT))) = 0
+    BEGIN
+        PRINT N'Tên công trình không được để trống!';
+        RETURN;
+    END
 
+    -- Kiểm tra ngày dự kiến hoàn thành phải sau ngày khởi công
+    IF @NgayDuKienHoanThanh < @NgayKhoiCong
+    BEGIN
+        PRINT N'Ngày dự kiến hoàn thành phải sau ngày khởi công!';
+        RETURN;
+    END
 
+    INSERT INTO tblCongtrinh (MaCT, TenCT, DiaDiem, NgayCapPhep, NgayKhoiCong, NgayDuKienHoanThanh)
+    VALUES (@MaCT, @TenCT, @DiaDiem, @NgayCapPhep, @NgayKhoiCong, @NgayDuKienHoanThanh);
+END;
+GO
+
+CREATE PROCEDURE sp_SuaCongTrinh
+    @MaCT VARCHAR(10),
+    @TenCT NVARCHAR(100),
+    @DiaDiem NVARCHAR(100),
+    @NgayCapPhep DATE,
+    @NgayKhoiCong DATE,
+    @NgayDuKienHoanThanh DATE
+AS
+BEGIN
+    -- Kiểm tra công trình tồn tại
+    IF NOT EXISTS (SELECT 1 FROM tblCongtrinh WHERE MaCT = @MaCT)
+    BEGIN
+        PRINT N'Không tìm thấy công trình cần sửa!';
+        RETURN;
+    END
+
+    -- Kiểm tra tên công trình không được rỗng
+    IF @TenCT IS NULL OR LEN(LTRIM(RTRIM(@TenCT))) = 0
+    BEGIN
+        PRINT N'Tên công trình không được để trống!';
+        RETURN;
+    END
+
+    -- Kiểm tra ngày dự kiến hoàn thành phải sau ngày khởi công
+    IF @NgayDuKienHoanThanh < @NgayKhoiCong
+    BEGIN
+        PRINT N'Ngày dự kiến hoàn thành phải sau ngày khởi công!';
+        RETURN;
+    END
+
+    -- Cập nhật thông tin công trình
+    UPDATE tblCongtrinh
+    SET TenCT = @TenCT,
+        DiaDiem = @DiaDiem,
+        NgayCapPhep = @NgayCapPhep,
+        NgayKhoiCong = @NgayKhoiCong,
+        NgayDuKienHoanThanh = @NgayDuKienHoanThanh
+    WHERE MaCT = @MaCT;
+END;
+GO
+
+CREATE PROCEDURE sp_XoaCongTrinh
+    @MaCT VARCHAR(10)
+AS
+BEGIN
+    -- Kiểm tra công trình tồn tại
+    IF NOT EXISTS (SELECT 1 FROM tblCongtrinh WHERE MaCT = @MaCT)
+    BEGIN
+        PRINT N'Không tìm thấy công trình!';
+        RETURN;
+    END
+
+    -- Kiểm tra còn nhân viên thi công không
+    IF EXISTS (SELECT 1 FROM tblThicong WHERE MaCT = @MaCT)
+    BEGIN
+        PRINT N'Công trình còn nhân viên thi công, không thể xóa!';
+        RETURN;
+    END
+
+    DELETE FROM tblCongtrinh WHERE MaCT = @MaCT;
+END;
+GO
 
 -- 4.2. NHÓM NGHIỆP VỤ (PHÂN CÔNG & CHẤM CÔNG)
 -----------------------------------------------
