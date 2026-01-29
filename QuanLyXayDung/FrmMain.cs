@@ -9,8 +9,15 @@ namespace QuanLyXayDung
 
         private void phòngBanToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmPhongBan f = new FrmPhongBan();
-            f.Show();
+            var form = new FrmPhongBan();
+            form.Show();
+        }
+
+        // Menu: Danh mục -> Công trình
+        private void congTrinhToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new FrmCongTrinh();
+            form.Show();
         }
 
         private void nhânViênToolStripMenuItem1_Click(object sender, EventArgs e)
