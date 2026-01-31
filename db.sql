@@ -472,6 +472,58 @@ BEGIN
 END;
 GO
 
+
+-- Lấy danh sách Nhân viên (để đổ vào ComboBox)
+CREATE PROCEDURE sp_LayDanhSachNhanVien
+AS
+BEGIN
+    SELECT MaNV, HoTen, GioiTinh, NgaySinh, DiaChi, MaPB 
+    FROM tblNhanvien;
+END;
+GO
+
+-- Lấy danh sách Công trình (để đổ vào ComboBox)
+CREATE PROCEDURE sp_LayDanhSachCongTrinh
+AS
+BEGIN
+    SELECT MaCT, TenCT, DiaDiem, NgayKhoiCong, NgayDuKienHoanThanh
+    FROM tblCongtrinh;
+END;
+GO
+
+-- Lấy danh sách Thi công (để hiển thị lên lưới)
+CREATE PROCEDURE sp_LayDanhSachThiCong
+AS
+BEGIN
+    SELECT 
+        tc.MaNV,
+        nv.HoTen,
+        tc.MaCT,
+        ct.TenCT,
+        tc.SoNgayCong
+    FROM tblThicong tc
+    JOIN tblNhanvien nv ON tc.MaNV = nv.MaNV
+    JOIN tblCongtrinh ct ON tc.MaCT = ct.MaCT;
+END;
+GO
+
+-- Xóa Phân công
+CREATE PROCEDURE sp_XoaPhanCong
+    @MaNV VARCHAR(10),
+    @MaCT VARCHAR(10)
+AS
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM tblThicong WHERE MaNV = @MaNV AND MaCT = @MaCT)
+    BEGIN
+        PRINT N'Không tìm thấy dữ liệu phân công để xóa!';
+        RETURN;
+    END
+
+    DELETE FROM tblThicong 
+    WHERE MaNV = @MaNV AND MaCT = @MaCT;
+END;
+GO
+
 -- =============================================
 -- 5. VIEWS (HỖ TRỢ BÁO CÁO CRYSTAL REPORT - MỤC 3.2)
 -- =============================================
@@ -502,59 +554,3 @@ SELECT
 FROM tblThicong tc
 JOIN tblNhanvien nv ON tc.MaNV = nv.MaNV
 JOIN tblCongtrinh ct ON tc.MaCT = ct.MaCT;
-GO
-
--- =============================================
--- 6. BỔ SUNG CÁC STORED PROCEDURE CÒN THIẾU
--- =============================================
-
--- 6.1. Lấy danh sách Nhân viên (để đổ vào ComboBox)
-CREATE PROCEDURE sp_LayDanhSachNhanVien
-AS
-BEGIN
-    SELECT MaNV, HoTen, GioiTinh, NgaySinh, DiaChi, MaPB 
-    FROM tblNhanvien;
-END;
-GO
-
--- 6.2. Lấy danh sách Công trình (để đổ vào ComboBox)
-CREATE PROCEDURE sp_LayDanhSachCongTrinh
-AS
-BEGIN
-    SELECT MaCT, TenCT, DiaDiem, NgayKhoiCong, NgayDuKienHoanThanh
-    FROM tblCongtrinh;
-END;
-GO
-
--- 6.3. Lấy danh sách Thi công (để hiển thị lên lưới)
-CREATE PROCEDURE sp_LayDanhSachThiCong
-AS
-BEGIN
-    SELECT 
-        tc.MaNV,
-        nv.HoTen,
-        tc.MaCT,
-        ct.TenCT,
-        tc.SoNgayCong
-    FROM tblThicong tc
-    JOIN tblNhanvien nv ON tc.MaNV = nv.MaNV
-    JOIN tblCongtrinh ct ON tc.MaCT = ct.MaCT;
-END;
-GO
-
--- 6.4. Xóa Phân công
-CREATE PROCEDURE sp_XoaPhanCong
-    @MaNV VARCHAR(10),
-    @MaCT VARCHAR(10)
-AS
-BEGIN
-    IF NOT EXISTS (SELECT 1 FROM tblThicong WHERE MaNV = @MaNV AND MaCT = @MaCT)
-    BEGIN
-        PRINT N'Không tìm thấy dữ liệu phân công để xóa!';
-        RETURN;
-    END
-
-    DELETE FROM tblThicong 
-    WHERE MaNV = @MaNV AND MaCT = @MaCT;
-END;
-GO

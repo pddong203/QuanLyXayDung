@@ -104,6 +104,7 @@ namespace QuanLyXayDung
             thiCôngToolStripMenuItem.Name = "thiCôngToolStripMenuItem";
             thiCôngToolStripMenuItem.Size = new Size(180, 22);
             thiCôngToolStripMenuItem.Text = "Thi công";
+            thiCôngToolStripMenuItem.Click += thiCongToolStripMenuItem_Click;
             // 
             // nghiệpVụToolStripMenuItem
             // 
@@ -117,6 +118,7 @@ namespace QuanLyXayDung
             chấmCôngToolStripMenuItem.Name = "chấmCôngToolStripMenuItem";
             chấmCôngToolStripMenuItem.Size = new Size(136, 22);
             chấmCôngToolStripMenuItem.Text = "Chấm công";
+            chấmCôngToolStripMenuItem.Click += thiCongToolStripMenuItem_Click;
             // 
             // tínhLươngToolStripMenuItem
             // 

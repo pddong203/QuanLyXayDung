@@ -25,6 +25,7 @@ namespace QuanLyXayDung
             this.label1 = new System.Windows.Forms.Label();
             this.btnPhanCong = new System.Windows.Forms.Button();
             this.btnChamCong = new System.Windows.Forms.Button();
+            this.btnCapNhat = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnLamMoi = new System.Windows.Forms.Button();
             
@@ -47,6 +48,7 @@ namespace QuanLyXayDung
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnCapNhat);
             this.groupBox1.Controls.Add(this.btnLamMoi);
             this.groupBox1.Controls.Add(this.btnXoa);
             this.groupBox1.Controls.Add(this.btnChamCong);
@@ -145,6 +147,17 @@ namespace QuanLyXayDung
             this.btnChamCong.Click += new System.EventHandler(this.btnChamCong_Click);
 
             // 
+            // btnCapNhat
+            // 
+            this.btnCapNhat.Location = new System.Drawing.Point(550, 110);
+            this.btnCapNhat.Name = "btnCapNhat";
+            this.btnCapNhat.Size = new System.Drawing.Size(100, 30);
+            this.btnCapNhat.TabIndex = 10;
+            this.btnCapNhat.Text = "Cập nhật";
+            this.btnCapNhat.UseVisualStyleBackColor = true;
+            this.btnCapNhat.Click += new System.EventHandler(this.btnCapNhat_Click);
+
+            // 
             // btnXoa
             // 
             this.btnXoa.Location = new System.Drawing.Point(330, 110);
@@ -197,5 +210,6 @@ namespace QuanLyXayDung
         private System.Windows.Forms.Button btnChamCong;
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnLamMoi;
+        private System.Windows.Forms.Button btnCapNhat;
     }
 }

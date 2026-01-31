@@ -97,18 +97,47 @@ namespace QuanLyXayDung
                 return;
             }
 
-            string maNV = cboNhanVien.SelectedValue.ToString();
-            string maCT = cboCongTrinh.SelectedValue.ToString();
-            int ngayCong = (int)txtSoNgayCong.Value;
+            string? maNV = cboNhanVien.SelectedValue.ToString();
+            string? maCT = cboCongTrinh.SelectedValue.ToString();
+            
+            int ngayCongHienTai = (int)txtSoNgayCong.Value;
+            int ngayCongMoi = ngayCongHienTai + 1;
 
-            if (ThiCongDAL.ChamCong(maNV, maCT, ngayCong))
+            if (maNV == null || maCT == null) return;
+
+            if (ThiCongDAL.ChamCong(maNV, maCT, ngayCongMoi))
             {
-                MessageBox.Show("Chấm công thành công!");
+                MessageBox.Show("Đã chấm công (+1) thành công!");
                 LoadData();
             }
             else
             {
                 MessageBox.Show("Chấm công thất bại! (Nhân viên chưa được phân công vào CT này)");
+            }
+        }
+
+        private void btnCapNhat_Click(object sender, EventArgs e)
+        {
+            if (cboNhanVien.SelectedValue == null || cboCongTrinh.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn bản ghi cần cập nhật!");
+                return;
+            }
+
+            string? maNV = cboNhanVien.SelectedValue.ToString();
+            string? maCT = cboCongTrinh.SelectedValue.ToString();
+            int ngayCong = (int)txtSoNgayCong.Value;
+
+            if (maNV == null || maCT == null) return;
+
+            if (ThiCongDAL.ChamCong(maNV, maCT, ngayCong))
+            {
+                MessageBox.Show("Cập nhật số ngày công thành công!");
+                LoadData();
+            }
+            else
+            {
+                MessageBox.Show("Cập nhật thất bại!");
             }
         }
 
