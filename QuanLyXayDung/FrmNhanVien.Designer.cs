@@ -53,7 +53,7 @@ namespace QuanLyXayDung
             label1.AutoSize = true;
             label1.Location = new Point(26, 27);
             label1.Name = "label1";
-            label1.Size = new Size(78, 15);
+            label1.Size = new Size(79, 15);
             label1.TabIndex = 0;
             label1.Text = "Mã nhân viên";
             // 
@@ -98,7 +98,7 @@ namespace QuanLyXayDung
             label6.AutoSize = true;
             label6.Location = new Point(26, 202);
             label6.Name = "label6";
-            label6.Size = new Size(62, 15);
+            label6.Size = new Size(65, 15);
             label6.TabIndex = 5;
             label6.Text = "Phòng ban";
             // 
@@ -160,7 +160,7 @@ namespace QuanLyXayDung
             // 
             // btnThem
             // 
-            btnThem.Location = new Point(72, 260);
+            btnThem.Location = new Point(60, 260);
             btnThem.Name = "btnThem";
             btnThem.Size = new Size(75, 23);
             btnThem.TabIndex = 13;
@@ -170,7 +170,7 @@ namespace QuanLyXayDung
             // 
             // btnSua
             // 
-            btnSua.Location = new Point(202, 260);
+            btnSua.Location = new Point(221, 260);
             btnSua.Name = "btnSua";
             btnSua.Size = new Size(75, 23);
             btnSua.TabIndex = 14;
@@ -180,7 +180,7 @@ namespace QuanLyXayDung
             // 
             // btnXoa
             // 
-            btnXoa.Location = new Point(332, 260);
+            btnXoa.Location = new Point(60, 316);
             btnXoa.Name = "btnXoa";
             btnXoa.Size = new Size(75, 23);
             btnXoa.TabIndex = 15;
@@ -190,7 +190,7 @@ namespace QuanLyXayDung
             // 
             // btnLuu
             // 
-            btnLuu.Location = new Point(202, 310);
+            btnLuu.Location = new Point(221, 316);
             btnLuu.Name = "btnLuu";
             btnLuu.Size = new Size(75, 23);
             btnLuu.TabIndex = 16;

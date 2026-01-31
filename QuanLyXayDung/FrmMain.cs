@@ -28,5 +28,15 @@ namespace QuanLyXayDung
             FrmNhanVien f = new FrmNhanVien();
             f.Show();
         }
+        private void phongBanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmPhongBan f = new FrmPhongBan();
+            f.Show();
+        }
+        private void thiCongToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmThiCong f = new FrmThiCong();
+            f.Show();
+        }
     }
 }
