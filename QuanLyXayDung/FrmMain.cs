@@ -10,8 +10,7 @@ namespace QuanLyXayDung
             InitializeComponent();
         }
 
-        // Menu: Danh mục -> Phòng ban
-        private void phongBanToolStripMenuItem_Click(object sender, EventArgs e)
+        private void phòngBanToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new FrmPhongBan();
             form.Show();
@@ -22,12 +21,6 @@ namespace QuanLyXayDung
         {
             var form = new FrmCongTrinh();
             form.Show();
-        }
-
-        private void thiCongToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FrmThiCong f = new FrmThiCong();
-            f.Show();
         }
 
         private void nhânViênToolStripMenuItem1_Click(object sender, EventArgs e)
