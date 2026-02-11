@@ -217,28 +217,32 @@ END;
 GO
 
 
-ALTER PROCEDURE sp_ThemPhongBan
+CREATE PROCEDURE sp_ThemPhongBan
     @MaPB VARCHAR(10),
     @TenPB NVARCHAR(50),
     @ChucNang NVARCHAR(255)
 AS
 BEGIN
+    -- Kiểm tra trùng mã phòng ban
     IF EXISTS (SELECT 1 FROM tblPhongBan WHERE MaPB = @MaPB)
     BEGIN
         PRINT N'Mã phòng ban đã tồn tại!';
         RETURN;
     END
 
+    -- Kiểm tra trùng tên phòng ban
     IF EXISTS (SELECT 1 FROM tblPhongBan WHERE TenPB = @TenPB)
     BEGIN
         PRINT N'Tên phòng ban đã tồn tại!';
         RETURN;
     END
 
+    -- Thêm phòng ban mới
     INSERT INTO tblPhongBan (MaPB, TenPB, ChucNang)
     VALUES (@MaPB, @TenPB, @ChucNang);
 END;
 GO
+
 
 
 CREATE PROCEDURE sp_SuaPhongBan

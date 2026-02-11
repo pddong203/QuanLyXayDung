@@ -1,42 +1,52 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace QuanLyXayDung
 {
     public partial class FrmMain : Form
     {
+        private static readonly Color CardHoverColor = Color.FromArgb(236, 240, 241);
+        private static readonly Color CardNormalColor = Color.White;
+
         public FrmMain()
         {
             InitializeComponent();
+            AttachCardHoverEffects();
         }
 
-        private void phòngBanToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AttachCardHoverEffects()
         {
-            var form = new FrmPhongBan();
-            form.Show();
+            AttachHover(pnlPhongBan);
+            AttachHover(pnlNhanVien);
+            AttachHover(pnlCongTrinh);
+            AttachHover(pnlThiCong);
         }
 
-        // Menu: Danh mục -> Công trình
-        private void congTrinhToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AttachHover(Panel pnl)
         {
-            var form = new FrmCongTrinh();
-            form.Show();
+            pnl.MouseEnter += (s, e) => { pnl.BackColor = CardHoverColor; };
+            pnl.MouseLeave += (s, e) => { pnl.BackColor = CardNormalColor; };
         }
 
-        private void nhânViênToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void pnlPhongBan_Click(object sender, EventArgs e)
         {
-            FrmNhanVien f = new FrmNhanVien();
-            f.Show();
+            new FrmPhongBan().Show();
         }
-        private void phongBanToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void pnlNhanVien_Click(object sender, EventArgs e)
         {
-            FrmPhongBan f = new FrmPhongBan();
-            f.Show();
+            new FrmNhanVien().Show();
         }
-        private void thiCongToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void pnlCongTrinh_Click(object sender, EventArgs e)
         {
-            FrmThiCong f = new FrmThiCong();
-            f.Show();
+            new FrmCongTrinh().Show();
+        }
+
+        private void pnlThiCong_Click(object sender, EventArgs e)
+        {
+            new FrmThiCong().Show();
         }
     }
 }
